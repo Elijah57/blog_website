@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+        <article class="media content-section">
+          <img src="{{ post.author.profile.image.url }}" class="rounded-circle article-img">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">By {{ post.author }}</a>
+              <small class="text-muted">on {{ post.date_posted }}</small>
+            </div>
+            <div>
+            <img src="{{ post.thumbnail.url }}" class="img-fluid">
+            </div>
+            <h2 class="article-title">{{ post.title }}</h2>
+            <p class="article-content">{{ post.content|urlize }}</p>
+            {% if request.user == post.author %}
+            <small class="text-muted">
+              <a href="{% url 'delete-post' post.id %}" class="btn btn-danger btn-sm  mb-3"> Delete</a>
+            <a href="{% url 'update-post' post.id %}" class="hover btn btn-primary btn-sm mb-3"> Edit</a>
+            </small>
+            {% endif %}
+          </div>
+        </article>
+
+{% endblock content %}
+
+
+
